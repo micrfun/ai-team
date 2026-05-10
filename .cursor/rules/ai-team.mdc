@@ -1,0 +1,48 @@
+---
+description: Project AI team rules — always applied
+alwaysApply: true
+---
+
+# Project Instructions
+
+This project uses the `.ai/` template system for AI-assisted development.
+
+## ⚠️ First action on every new task
+
+Check `.ai/context/project.md`:
+- If contains `AI-TEAM-CONTEXT: NOT_INITIALIZED` → **stop and run the `init` workflow first**
+- If filled in → proceed normally
+
+The `init` workflow activates the `bootstrap` role to auto-detect, interview briefly, and fill `.ai/context/*.md`. Skip only if user explicitly says so.
+
+## File map
+
+- **Roles**: `.ai/roles/<role>.md`
+- **Workflows**: `.ai/workflows/<workflow>.md`
+- **Templates**: `.ai/templates/<template>.md`
+- **Context**: `.ai/context/{project,stack,conventions}.md`
+
+## At the start of any task (after init)
+
+Read in order:
+1. `.ai/context/project.md`
+2. `.ai/context/stack.md`
+3. `.ai/context/conventions.md`
+
+## When asked to act as a role
+1. Read `.ai/roles/<role>.md` fully
+2. Follow `Principles`, avoid `Anti-patterns`
+3. Produce outputs in formats from `Outputs`
+4. Use templates from `.ai/templates/`
+
+## When asked to run a workflow
+1. Read `.ai/workflows/<workflow>.md`
+2. Execute steps in order
+3. Save artifacts to specified paths
+4. Stop at human checkpoints
+
+## Available roles
+bootstrap, orchestrator, product, ux-designer, architect, engineer, qa, reviewer, security, growth
+
+## Available workflows
+init, discovery, plan, implement, review, ship

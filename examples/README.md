@@ -10,3 +10,11 @@ They are not generated output and do not include installed `.ai/` folders.
 - `python-cli-project` - a small Python CLI package.
 
 Use them as disposable targets when testing installation and bootstrap behavior.
+
+Each example may include an `after/` directory showing representative initialized AI Team artifacts:
+
+- `.ai/context/*`
+- `specs/example-feature.md`
+- `reviews/example-feature-review.md`
+
+These files are documentation fixtures. They are not generated during install.

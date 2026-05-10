@@ -32,7 +32,10 @@ jobs:
           New-Item -ItemType Directory -Force $target | Out-Null
           powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target
           $required = @(
+            ".ai/protocol.md",
             ".ai/context/project.md",
+            ".ai/state/current.md",
+            ".ai/workflows/agent-run.md",
             ".codex/AGENTS.md",
             "AI-TEAM-README.md",
             "AI-TEAM-INSTALL.md",
@@ -51,13 +54,22 @@ jobs:
           $target = Join-Path $env:RUNNER_TEMP "ai-team-existing"
           New-Item -ItemType Directory -Force (Join-Path $target ".codex") | Out-Null
           "existing" | Set-Content (Join-Path $target ".codex/AGENTS.md")
+          New-Item -ItemType Directory -Force (Join-Path $target ".ai/context") | Out-Null
+          "project context" | Set-Content (Join-Path $target ".ai/context/project.md")
           powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target
           $existing = Get-Content (Join-Path $target ".codex/AGENTS.md") -Raw
           if ($existing.Trim() -ne "existing") {
             throw "Existing AGENTS.md was overwritten"
           }
+          $context = Get-Content (Join-Path $target ".ai/context/project.md") -Raw
+          if ($context.Trim() -ne "project context") {
+            throw "Existing AI context was overwritten"
+          }
           if (-not (Test-Path (Join-Path $target ".codex/AGENTS.md.ai-team-new"))) {
             throw "Conflict copy was not created"
+          }
+          if (-not (Test-Path (Join-Path $target ".ai/context/project.md.ai-team-new"))) {
+            throw "Context conflict copy was not created"
           }
 
       - name: Force overwrites existing files
@@ -97,7 +109,10 @@ jobs:
           mkdir -p "$target"
           ./install.sh "$target"
           required=(
+            ".ai/protocol.md"
             ".ai/context/project.md"
+            ".ai/state/current.md"
+            ".ai/workflows/agent-run.md"
             ".codex/AGENTS.md"
             "AI-TEAM-README.md"
             "AI-TEAM-INSTALL.md"
@@ -117,13 +132,23 @@ jobs:
           target="$RUNNER_TEMP/ai-team-existing"
           mkdir -p "$target/.codex"
           printf '%s\n' "existing" > "$target/.codex/AGENTS.md"
+          mkdir -p "$target/.ai/context"
+          printf '%s\n' "project context" > "$target/.ai/context/project.md"
           ./install.sh "$target"
           if [ "$(cat "$target/.codex/AGENTS.md")" != "existing" ]; then
             echo "Existing AGENTS.md was overwritten"
             exit 1
           fi
+          if [ "$(cat "$target/.ai/context/project.md")" != "project context" ]; then
+            echo "Existing AI context was overwritten"
+            exit 1
+          fi
           if [ ! -f "$target/.codex/AGENTS.md.ai-team-new" ]; then
             echo "Conflict copy was not created"
+            exit 1
+          fi
+          if [ ! -f "$target/.ai/context/project.md.ai-team-new" ]; then
+            echo "Context conflict copy was not created"
             exit 1
           fi
 
@@ -138,3 +163,45 @@ jobs:
             echo "Force mode did not overwrite AGENTS.md"
             exit 1
           fi
+
+  protocol-structure:
+    name: Protocol structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Required protocol files exist
+        shell: bash
+        run: |
+          required=(
+            ".ai/protocol.md"
+            ".ai/context/project.md"
+            ".ai/context/stack.md"
+            ".ai/context/conventions.md"
+            ".ai/state/current.md"
+            ".ai/state/tasks.md"
+            ".ai/state/blockers.md"
+            ".ai/state/risks.md"
+            ".ai/state/handoffs.md"
+            ".ai/workflows/agent-run.md"
+            ".ai/workflows/update-ai-team.md"
+          )
+          for path in "${required[@]}"; do
+            if [ ! -f "$path" ]; then
+              echo "Missing required protocol file: $path"
+              exit 1
+            fi
+          done
+
+      - name: Role and workflow docs expose required sections
+        shell: bash
+        run: |
+          for role in .ai/roles/*.md; do
+            grep -q "^## Purpose" "$role" || { echo "$role missing Purpose"; exit 1; }
+            grep -q "^## Outputs" "$role" || { echo "$role missing Outputs"; exit 1; }
+          done
+          for workflow in .ai/workflows/*.md; do
+            grep -q "^## When to use" "$workflow" || { echo "$workflow missing When to use"; exit 1; }
+            grep -q "^## Steps" "$workflow" || { echo "$workflow missing Steps"; exit 1; }
+          done

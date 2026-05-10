@@ -8,11 +8,13 @@ AI Team is intended to become a portable standard layer for agent-assisted devel
 - Add compatibility notes for more agents as users report successful setups.
 - Improve role contracts based on real project usage.
 - Add more presets for common stacks.
+- Stabilize `.ai/protocol.md` from `0.2-draft` to `0.2`.
+- Validate `.ai/state/*` conventions in real multi-agent projects.
 
 ## Medium term
 
-- Add a safe update assistant workflow for reviewing `.ai-team-new` files.
-- Add example initialized contexts for the example projects.
+- Expand the safe update assistant workflow for reviewing `.ai-team-new` files.
+- Add more initialized example contexts for real-world stacks.
 - Add release notes to GitHub Releases for each tag.
 - Add a public gallery of installed-project patterns.
 

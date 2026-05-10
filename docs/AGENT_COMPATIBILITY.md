@@ -9,6 +9,7 @@ Give any agent this sequence:
 ```text
 Install AI Team from https://github.com/micrfun/ai-team.
 After installation, read AI-TEAM-BOOTSTRAP.md.
+Then read .ai/protocol.md and .ai/workflows/agent-run.md.
 Initialize .ai/context/project.md, .ai/context/stack.md, and .ai/context/conventions.md for this project.
 Do not overwrite existing project instructions unless I explicitly approve it.
 Do not run runtime commands unless this project allows them.
@@ -80,3 +81,5 @@ If the agent cannot run shell commands, ask it to manually copy:
 - `INSTALL.md` as `AI-TEAM-INSTALL.md`
 - `AGENT_INSTALL_PROMPT.md` as `AI-TEAM-AGENT-INSTALL-PROMPT.md`
 - `AI_TEAM_BOOTSTRAP.md` as `AI-TEAM-BOOTSTRAP.md`
+
+See [COMPATIBILITY_MATRIX.md](COMPATIBILITY_MATRIX.md) for a task-oriented comparison.

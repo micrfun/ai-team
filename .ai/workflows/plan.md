@@ -13,6 +13,7 @@
 
 3. **Activate `architect`** → техническая спецификация
    - Альтернативы, выбор, контракты, схемы данных
+   - Обязательные секции: `Non-goals`, `Assumptions`, `Files likely to change`, `Rollback plan`, `Implementation readiness`
    - Output: `specs/<feature>.md` + при необходимости `decisions/NNNN-<title>.md`
 
 4. **Activate `security`** → проверка спеки на риски
@@ -28,9 +29,12 @@
 - `specs/<feature>-ux.md` (если применимо)
 - `specs/<feature>.md`
 - `decisions/NNNN-<title>.md` (если применимо)
+- обновлённый `.ai/state/current.md`
 
 ## Exit criteria
 - Спека описывает, что и как строить
 - Acceptance criteria измеримы
 - Открытые вопросы либо закрыты, либо явно помечены
 - Security-риски проверены
+- `Implementation readiness` явно говорит `Ready for implementation: yes/no`
+- рискованные изменения имеют rollback plan

@@ -23,9 +23,12 @@ The `init` workflow activates the `bootstrap` role, which auto-detects from proj
 ## At the start of any task (after init)
 
 Read in this order:
-1. `.ai/context/project.md`
-2. `.ai/context/stack.md`
-3. `.ai/context/conventions.md`
+1. `.ai/protocol.md`
+2. `.ai/workflows/agent-run.md`
+3. `.ai/context/project.md`
+4. `.ai/context/stack.md`
+5. `.ai/context/conventions.md`
+6. `.ai/state/current.md` if present
 
 ## When asked to act as a role
 1. Read `.ai/roles/<role>.md`
@@ -49,4 +52,4 @@ Gemini's large context window is well-suited for:
 bootstrap, orchestrator, product, ux-designer, architect, engineer, qa, reviewer, security, growth
 
 ## Available workflows
-init, discovery, plan, implement, review, ship
+agent-run, init, discovery, plan, implement, review, ship, update-ai-team

@@ -40,6 +40,7 @@ Expected:
 - `-DryRun` prints planned operations and does not create target files.
 - normal install creates `.ai/`, adapter folders, and `AI-TEAM-*.md`.
 - repeated install preserves existing files and writes `.ai-team-new` conflict files.
+- repeated install preserves `.ai/context/project.md` and writes the incoming copy as `.ai-team-new`.
 - `-Force` overwrites AI Team files intentionally.
 
 ## Bash checks
@@ -58,6 +59,7 @@ Expected:
 - `--dry-run` prints planned operations and does not create target files.
 - normal install creates `.ai/`, adapter folders, and `AI-TEAM-*.md`.
 - repeated install preserves existing files and writes `.ai-team-new` conflict files.
+- repeated install preserves `.ai/context/project.md` and writes the incoming copy as `.ai-team-new`.
 - `--force` overwrites AI Team files intentionally.
 
 ## Raw-link checks
@@ -87,7 +89,7 @@ GitHub Actions runs a subset of these checks on:
 - Windows with PowerShell;
 - Ubuntu with bash.
 
-CI checks fresh install, dry-run, safe reinstall, and force mode. Raw-link checks are kept manual so release candidates can be tested against the intended branch or tag.
+CI checks fresh install, dry-run, safe reinstall, context preservation, state/protocol files, and force mode. Raw-link checks are kept manual so release candidates can be tested against the intended branch or tag.
 
 ## Bootstrap check
 

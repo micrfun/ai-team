@@ -1,8 +1,10 @@
 # Spec: <Feature Name>
 
-**Status**: draft / approved / implemented
-**Author role**: architect
-**Created**: YYYY-MM-DD
+**Status**: draft / reviewed / approved / implemented / tested / shipped / archived
+**Owner role**: architect
+**Last updated**: YYYY-MM-DD
+**Depends on**:
+**Next action**:
 **Related**: <links to story, ADRs>
 
 ## Problem
@@ -37,6 +39,21 @@
 
 ## Implementation notes
 <Конкретные подсказки Engineer'у: где какие файлы, какие паттерны>
+
+## Files likely to change
+- <path or area>
+
+## Implementation readiness
+
+**Ready for implementation**: yes / no
+
+### Readiness notes
+- <Что должно быть решено до implementation>
+
+## Rollback plan
+- How to disable:
+- How to revert migration:
+- How to restore previous behavior:
 
 ## Security
 <Заполняется на шаге security в workflow `plan`>

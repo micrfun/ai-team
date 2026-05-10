@@ -1,8 +1,21 @@
 # AI Team
 
-Универсальный шаблон для добавления AI-команды разработки в любой проект.
+AI Team — это портативный файловый протокол `.ai/` для координации AI-агентов внутри любого репозитория.
 
-Проект добавляет в целевой репозиторий инструмент-независимое ядро `.ai/` с ролями, workflow, шаблонами артефактов и адаптерами для разных AI-инструментов: Claude Code, Codex, Gemini CLI, Cursor, Antigravity и других агентов, которые умеют читать файлы проекта.
+Он добавляет в целевой репозиторий инструмент-независимое ядро `.ai/` с контекстом проекта, ролями, workflow, шаблонами, state-файлами и адаптерами для разных AI-инструментов: Claude Code, Codex, Gemini CLI, Cursor, Antigravity и других file-aware агентов.
+
+AI Team is:
+
+- a file-based protocol;
+- a role/workflow template;
+- a compatibility layer for different agents.
+
+AI Team is not:
+
+- an agent runtime;
+- a task queue;
+- a deployment system;
+- a replacement for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw, or other agents.
 
 GitHub: https://github.com/micrfun/ai-team
 
@@ -18,10 +31,10 @@ GitHub: https://github.com/micrfun/ai-team
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.1.1` link:
+Stable `v0.2.0` link:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.1.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
 **macOS / Linux:**
@@ -30,10 +43,10 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.1.1` link:
+Stable `v0.2.0` link:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.1.1/install.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.sh | bash -s -- .
 ```
 
 ### Установка из локальной копии
@@ -86,11 +99,13 @@ Do not overwrite existing agent instructions without asking.
 
 ```
 .ai/                      ← инструмент-независимое ядро
+  protocol.md             ← файловый протокол .ai/
   roles/                  ← описания ролей
   workflows/              ← процессы
   templates/              ← шаблоны артефактов (spec, ADR, review, eval)
   presets/                ← типовые настройки для web, Python, open-source, agent tooling
   context/                ← контекст проекта (заполняется bootstrap'ом)
+  state/                  ← текущее состояние, задачи, blocker'ы, риски, handoff'ы
 .claude/                  ← адаптер Claude Code (CLAUDE.md + agents/ + commands/)
 .codex/                   ← адаптер Codex CLI (AGENTS.md)
 .gemini/                  ← адаптер Gemini CLI (GEMINI.md)
@@ -140,6 +155,11 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target C:\path\to\your\p
 | `ship` | Подготовка и проведение релиза |
 
 ## Как использовать
+
+### Универсальный запуск агента
+```
+"Прочитай .ai/protocol.md и .ai/workflows/agent-run.md, затем обработай эту задачу по AI Team protocol."
+```
 
 ### Описать задачу обычным языком
 ```
@@ -209,6 +229,9 @@ releases/   ← release notes и postmortem
 - Update guide: [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md)
 - Release checklist: [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
 - Agent compatibility: [docs/AGENT_COMPATIBILITY.md](docs/AGENT_COMPATIBILITY.md)
+- Compatibility matrix: [docs/COMPATIBILITY_MATRIX.md](docs/COMPATIBILITY_MATRIX.md)
 - Presets: [docs/PRESETS.md](docs/PRESETS.md)
 - Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
 - Examples: [examples/README.md](examples/README.md)
+- Protocol: [.ai/protocol.md](.ai/protocol.md)
+- Agent-run workflow: [.ai/workflows/agent-run.md](.ai/workflows/agent-run.md)

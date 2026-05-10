@@ -27,9 +27,12 @@ The `init` workflow (`.ai/workflows/init.md`) activates the `bootstrap` role, wh
 ## How to act
 
 **At the start of any task** (after init):
-1. Read `.ai/context/project.md`
-2. Read `.ai/context/stack.md`
-3. Read `.ai/context/conventions.md`
+1. Read `.ai/protocol.md`
+2. Read `.ai/workflows/agent-run.md`
+3. Read `.ai/context/project.md`
+4. Read `.ai/context/stack.md`
+5. Read `.ai/context/conventions.md`
+6. Read `.ai/state/current.md` if present
 
 **When asked to act as a role**:
 1. Read `.ai/roles/<role>.md` fully
@@ -56,4 +59,4 @@ Slash commands in `.claude/commands/` map to workflows in `.ai/workflows/`.
 bootstrap, orchestrator, product, ux-designer, architect, engineer, qa, reviewer, security, growth
 
 ## Available workflows
-init, discovery, plan, implement, review, ship
+agent-run, init, discovery, plan, implement, review, ship, update-ai-team

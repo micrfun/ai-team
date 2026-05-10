@@ -20,3 +20,5 @@ Read .ai/presets/<preset>.md and apply the relevant conventions to this project 
 ```
 
 The agent should update `.ai/context/project.md`, `.ai/context/stack.md`, and `.ai/context/conventions.md` only after explaining what it plans to change.
+
+Presets may also inform `.ai/state/current.md` when a workflow is already active.

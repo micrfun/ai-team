@@ -16,13 +16,32 @@
 
 ## Принцип работы
 
-1. **Понять запрос**: что это — discovery, проектирование, реализация, релиз, рост?
-2. **Выбрать workflow**: подходящий из `.ai/workflows/` или составить свой из шагов
-3. **Назначить роли**: какая роль на каком шаге
-4. **Запустить шаги по порядку**: каждая роль получает свой контекст и артефакты предыдущих
-5. **Проверить артефакты**: соответствуют ли шаблонам, нет ли пропусков
-6. **Эскалировать**: открытые вопросы, blocker'ы, нестыковки
-7. **Сводка для человека**: что сделано, что осталось, где нужно решение
+1. **Read protocol and context**: `.ai/protocol.md`, `.ai/context/project.md`, `.ai/context/stack.md`, `.ai/context/conventions.md`
+2. **Read state**: `.ai/state/current.md`, `.ai/state/tasks.md`, `.ai/state/blockers.md`, `.ai/state/risks.md`
+3. **Понять запрос**: что это — discovery, проектирование, реализация, релиз, рост?
+4. **Выбрать workflow**: подходящий из `.ai/workflows/` или составить свой из шагов
+5. **Обновить state**: записать текущий workflow, task, role, last artifact, next expected action в `.ai/state/current.md`
+6. **Назначить роли**: какая роль на каком шаге
+7. **Запустить шаги по порядку**: каждая роль получает свой контекст и артефакты предыдущих
+8. **Проверить артефакты**: соответствуют ли шаблонам, нет ли пропусков, указан ли lifecycle status
+9. **Эскалировать**: открытые вопросы, blocker'ы, нестыковки
+10. **Сводка для человека**: что сделано, что осталось, где нужно решение
+
+## Operational protocol
+
+Use this sequence for multi-role work:
+
+1. Read `.ai/context/*`.
+2. Read `.ai/state/current.md`.
+3. Classify the user request.
+4. Select a workflow.
+5. Write or update `.ai/state/current.md`.
+6. Assign the next role.
+7. Check the expected artifact.
+8. Stop at human checkpoint when required.
+9. Summarize changed files and next action.
+
+When handing work from one role to another, append a short entry to `.ai/state/handoffs.md`.
 
 ## Принципы
 - Минимизируй передачу контекста между ролями: каждый получает только то, что ему нужно

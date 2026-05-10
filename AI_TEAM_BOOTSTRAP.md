@@ -26,9 +26,11 @@ Initialize AI Team for the current project without relying on hidden agent behav
    - existing `.ai/context/*.md`
 
 2. Read AI Team context files:
+   - `.ai/protocol.md`
    - `.ai/context/project.md`
    - `.ai/context/stack.md`
    - `.ai/context/conventions.md`
+   - `.ai/state/current.md`
 
 3. If `.ai/context/project.md` contains `AI-TEAM-CONTEXT: NOT_INITIALIZED`, run the init workflow manually:
    - read `.ai/workflows/init.md`;

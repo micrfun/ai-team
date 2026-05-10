@@ -24,6 +24,11 @@ These files are project-specific and should not be blindly overwritten:
 - `.ai/context/project.md`
 - `.ai/context/stack.md`
 - `.ai/context/conventions.md`
+- `.ai/state/current.md`
+- `.ai/state/tasks.md`
+- `.ai/state/blockers.md`
+- `.ai/state/risks.md`
+- `.ai/state/handoffs.md`
 - existing `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and Cursor rules
 - any local workflow or role customizations made by the project
 
@@ -74,6 +79,8 @@ find . -name '*.ai-team-new' -type f
 4. Merge relevant changes manually.
 
 5. Delete reviewed `.ai-team-new` files only after confirming the merge.
+
+AI Team also includes `.ai/workflows/update-ai-team.md`, which agents can use to review and classify `.ai-team-new` files before applying changes.
 
 ## Force mode
 

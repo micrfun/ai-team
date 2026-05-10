@@ -12,10 +12,10 @@ Run the command from the root of the target project.
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.1.1` install:
+Stable `v0.2.0` install:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.1.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
 Preview without changing target files:
@@ -30,10 +30,10 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.1.1` install:
+Stable `v0.2.0` install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.1.1/install.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.sh | bash -s -- .
 ```
 
 Preview without changing target files:
@@ -93,6 +93,8 @@ Read AI-TEAM-BOOTSTRAP.md and run the AI Team init workflow for this project.
 ```
 
 The agent should read `AI-TEAM-BOOTSTRAP.md`, then `.ai/workflows/init.md`, use the `bootstrap` role, and fill the context files for the specific project.
+
+For normal follow-up tasks, ask the agent to read `.ai/protocol.md` and `.ai/workflows/agent-run.md` before choosing a role or workflow.
 
 ## Updating
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0
+
+- Formalize `.ai/` as a protocol with `.ai/protocol.md`.
+- Add `.ai/state/*` files for active work coordination.
+- Add universal `.ai/workflows/agent-run.md`.
+- Add `.ai/workflows/update-ai-team.md`.
+- Strengthen orchestrator, plan, implement, and spec lifecycle contracts.
+- Add compatibility matrix and initialized example artifacts.
+- Expand CI smoke tests for protocol/state/context preservation.
+
 ## 0.1.1
 
 - Add GitHub Actions smoke tests for PowerShell and bash installers.

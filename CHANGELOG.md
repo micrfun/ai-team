@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - Add GitHub Actions smoke tests for PowerShell and bash installers.
 - Add agent compatibility guide.

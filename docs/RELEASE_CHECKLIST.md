@@ -20,14 +20,14 @@ Runtime check must be performed by the user locally.
 
 ```bash
 git status -sb
-git tag -a v0.1.0 -m "v0.1.0"
+git tag -a <version> -m "<version>"
 git push origin main
-git push origin v0.1.0
+git push origin <version>
 ```
 
 ## Release notes template
 
-## AI Team v0.1.0
+## AI Team <version>
 
 Initial public release.
 
@@ -44,11 +44,11 @@ Initial public release.
 PowerShell:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/<version>/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/<version>/install.sh | bash -s -- .
 ```

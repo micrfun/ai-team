@@ -12,10 +12,10 @@ Run the command from the root of the target project.
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.2.0` install:
+Stable `v0.2.1` install:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.1
 ```
 
 Preview without changing target files:
@@ -30,10 +30,10 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.2.0` install:
+Stable `v0.2.1` install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- . --ref v0.2.1
 ```
 
 Preview without changing target files:

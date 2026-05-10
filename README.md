@@ -17,6 +17,8 @@ AI Team is not:
 - a deployment system;
 - a replacement for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw, or other agents.
 
+`v0.2.1` includes the draft `0.2` protocol. The protocol is usable, but not frozen yet.
+
 GitHub: https://github.com/micrfun/ai-team
 
 [![Smoke tests](https://github.com/micrfun/ai-team/actions/workflows/smoke-tests.yml/badge.svg)](https://github.com/micrfun/ai-team/actions/workflows/smoke-tests.yml)
@@ -31,10 +33,10 @@ GitHub: https://github.com/micrfun/ai-team
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.2.0` link:
+Stable `v0.2.1` link:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.1
 ```
 
 **macOS / Linux:**
@@ -43,10 +45,10 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.2.0` link:
+Stable `v0.2.1` link:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.0/install.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- . --ref v0.2.1
 ```
 
 ### Установка из локальной копии
@@ -234,4 +236,6 @@ releases/   ← release notes и postmortem
 - Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
 - Examples: [examples/README.md](examples/README.md)
 - Protocol: [.ai/protocol.md](.ai/protocol.md)
+- Public protocol notes: [docs/PROTOCOL.md](docs/PROTOCOL.md)
+- Why files as protocol: [docs/WHY_FILES_AS_PROTOCOL.md](docs/WHY_FILES_AS_PROTOCOL.md)
 - Agent-run workflow: [.ai/workflows/agent-run.md](.ai/workflows/agent-run.md)

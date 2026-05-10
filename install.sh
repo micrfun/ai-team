@@ -1,17 +1,30 @@
 #!/usr/bin/env bash
 # AI Team installer
 # Usage:
-#   curl -fsSL <URL>/install.sh | bash -s -- [target-directory] [--force] [--dry-run]
-#   ./install.sh [target-directory] [--force] [--dry-run]
+#   curl -fsSL <URL>/install.sh | bash -s -- [target-directory] [--ref <branch-or-tag>] [--force] [--dry-run]
+#   ./install.sh [target-directory] [--ref <branch-or-tag>] [--force] [--dry-run]
 
 set -euo pipefail
 
 TARGET=""
+REF="main"
 FORCE=0
 DRY_RUN=0
 
-for arg in "$@"; do
+while [ "$#" -gt 0 ]; do
+    arg="$1"
     case "$arg" in
+        --ref)
+            shift
+            if [ "$#" -eq 0 ]; then
+                echo "--ref requires a value"
+                exit 1
+            fi
+            REF="$1"
+            ;;
+        --ref=*)
+            REF="${arg#--ref=}"
+            ;;
         --force)
             FORCE=1
             ;;
@@ -31,6 +44,7 @@ for arg in "$@"; do
             fi
             ;;
     esac
+    shift
 done
 
 TARGET="${TARGET:-$(pwd)}"
@@ -106,10 +120,26 @@ cleanup() {
 trap cleanup EXIT
 
 if [ "$IS_LOCAL_SOURCE" -ne 1 ] || [ ! -d "$SOURCE_DIR/.ai" ]; then
-    write_action "Download AI Team archive"
+    archive_ref="$REF"
+    if [[ "$REF" =~ ^refs/(heads|tags)/(.+)$ ]]; then
+        archive_kind="${BASH_REMATCH[1]}"
+        archive_ref="${BASH_REMATCH[2]}"
+    elif [[ "$REF" =~ ^(heads|tags)/(.+)$ ]]; then
+        archive_kind="${BASH_REMATCH[1]}"
+        archive_ref="${BASH_REMATCH[2]}"
+    elif [[ "$REF" =~ ^v[0-9] ]]; then
+        archive_kind="tags"
+    else
+        archive_kind="heads"
+    fi
+    write_action "Download AI Team archive ref $REF"
     TEMP_SOURCE="$(mktemp -d)"
-    curl -fsSL "https://github.com/micrfun/ai-team/archive/refs/heads/main.tar.gz" | tar -xz -C "$TEMP_SOURCE"
-    SOURCE_DIR="$TEMP_SOURCE/ai-team-main"
+    curl -fsSL "https://github.com/micrfun/ai-team/archive/refs/$archive_kind/$archive_ref.tar.gz" | tar -xz -C "$TEMP_SOURCE"
+    SOURCE_DIR="$(find "$TEMP_SOURCE" -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+    if [ -z "$SOURCE_DIR" ] || [ ! -d "$SOURCE_DIR/.ai" ]; then
+        echo "Downloaded AI Team archive does not contain .ai/"
+        exit 1
+    fi
 fi
 
 echo "AI Team installer"
@@ -121,6 +151,7 @@ elif [ "$DRY_RUN" -eq 1 ]; then
 else
     echo "Mode: safe merge, existing files are preserved"
 fi
+echo "Source ref: $REF"
 echo ""
 
 if [ ! -d "$TARGET" ]; then

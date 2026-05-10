@@ -11,6 +11,7 @@ Runtime check must be performed by the user locally.
 - [ ] Review `AI_TEAM_BOOTSTRAP.md`.
 - [ ] Review `AGENT_INSTALL_PROMPT.md`.
 - [ ] Review `CHANGELOG.md`.
+- [ ] Confirm stable raw install commands pass the matching `-Ref` / `--ref` tag.
 - [ ] Run `git diff --check`.
 - [ ] Run smoke tests from `docs/SMOKE_TESTS.md` in disposable target projects.
 - [ ] Confirm GitHub Actions smoke tests pass on the release commit.

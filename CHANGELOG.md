@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Fix stable raw installer behavior with explicit `-Ref` / `--ref` support.
+- Update stable install commands to pass the matching release tag.
+- Add templates and example state artifacts for implementation, QA, and handoff records.
+- Add public protocol docs and files-as-protocol rationale.
+
 ## 0.2.0
 
 - Formalize `.ai/` as a protocol with `.ai/protocol.md`.

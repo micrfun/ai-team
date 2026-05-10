@@ -1,9 +1,10 @@
 # AI Team installer for Windows / PowerShell
 # Usage:
-#   .\install.ps1 [-Target <path>] [-Force] [-DryRun]
+#   .\install.ps1 [-Target <path>] [-Ref <branch-or-tag>] [-Force] [-DryRun]
 
 param(
     [string]$Target = (Get-Location).Path,
+    [string]$Ref = "main",
     [switch]$Force,
     [switch]$DryRun
 )
@@ -81,12 +82,29 @@ try {
         $TempSource = Join-Path ([System.IO.Path]::GetTempPath()) ("ai-team-" + [System.Guid]::NewGuid().ToString("N"))
         $ArchivePath = Join-Path $TempSource "ai-team.zip"
         $ExtractPath = Join-Path $TempSource "extract"
+        if ($Ref -match '^refs/(heads|tags)/(.+)$') {
+            $ArchiveKind = $Matches[1]
+            $ArchiveRef = $Matches[2]
+        } elseif ($Ref -match '^(heads|tags)/(.+)$') {
+            $ArchiveKind = $Matches[1]
+            $ArchiveRef = $Matches[2]
+        } elseif ($Ref -match '^v[0-9]') {
+            $ArchiveKind = "tags"
+            $ArchiveRef = $Ref
+        } else {
+            $ArchiveKind = "heads"
+            $ArchiveRef = $Ref
+        }
+        $ArchiveUrl = "https://github.com/micrfun/ai-team/archive/refs/$ArchiveKind/$ArchiveRef.zip"
 
-        Write-Action "Download AI Team archive"
+        Write-Action "Download AI Team archive ref $Ref"
         New-Item -ItemType Directory -Path $TempSource -Force | Out-Null
-        Invoke-WebRequest "https://github.com/micrfun/ai-team/archive/refs/heads/main.zip" -OutFile $ArchivePath
+        Invoke-WebRequest $ArchiveUrl -OutFile $ArchivePath
         Expand-Archive -Path $ArchivePath -DestinationPath $ExtractPath -Force
-        $SourceDir = Join-Path $ExtractPath "ai-team-main"
+        $SourceDir = (Get-ChildItem -LiteralPath $ExtractPath -Directory | Select-Object -First 1).FullName
+        if (-not $SourceDir -or -not (Test-Path (Join-Path $SourceDir ".ai"))) {
+            throw "Downloaded AI Team archive does not contain .ai/"
+        }
     }
 
     Write-Host "AI Team installer"
@@ -94,6 +112,7 @@ try {
     if ($Force) { Write-Host "Mode: force overwrite" }
     elseif ($DryRun) { Write-Host "Mode: dry run, no files will be changed" }
     else { Write-Host "Mode: safe merge, existing files are preserved" }
+    Write-Host "Source ref: $Ref"
     Write-Host ""
 
     if (-not (Test-Path $Target)) {

@@ -1,6 +1,7 @@
 # AI Team `.ai/` Protocol
 
 **Protocol version**: 0.2-draft
+**AI Team release**: 0.2.1
 **Purpose**: Define the portable file protocol used by AI coding agents inside a repository.
 
 AI Team is a file-based coordination layer. Agents communicate through project files, not hidden chat memory or a required runtime service.
@@ -66,6 +67,20 @@ Long-lived artifacts should start with:
 **Last updated**: YYYY-MM-DD
 **Depends on**:
 **Next action**:
+```
+
+## Standard templates
+
+Required templates:
+
+```text
+.ai/templates/spec.md
+.ai/templates/review.md
+.ai/templates/eval.md
+.ai/templates/decision.md
+.ai/templates/implementation-summary.md
+.ai/templates/qa-report.md
+.ai/templates/handoff.md
 ```
 
 ## Lifecycle statuses

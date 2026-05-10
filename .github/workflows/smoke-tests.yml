@@ -84,6 +84,29 @@ jobs:
             throw "Force mode did not overwrite AGENTS.md"
           }
 
+      - name: Ref parameter accepts release tag
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-ref"
+          New-Item -ItemType Directory -Force $target | Out-Null
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target -Ref v0.2.0 -DryRun
+          if (Test-Path (Join-Path $target ".ai")) {
+            throw "Ref dry run created .ai directory"
+          }
+
+      - name: Raw tagged installer uses matching ref
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-raw-tag"
+          $installer = Join-Path $env:RUNNER_TEMP "install-ai-team.ps1"
+          New-Item -ItemType Directory -Force $target | Out-Null
+          Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/${{ github.ref_name }}/install.ps1" -OutFile $installer
+          powershell -ExecutionPolicy Bypass -File $installer -Target $target -Ref "${{ github.ref_name }}" -DryRun
+          if (Test-Path (Join-Path $target ".ai")) {
+            throw "Raw tagged dry run created .ai directory"
+          }
+
   bash-installer:
     name: Bash installer
     runs-on: ubuntu-latest
@@ -164,6 +187,29 @@ jobs:
             exit 1
           fi
 
+      - name: Ref parameter accepts release tag
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-ref"
+          mkdir -p "$target"
+          ./install.sh "$target" --ref v0.2.0 --dry-run
+          if [ -d "$target/.ai" ]; then
+            echo "Ref dry run created .ai directory"
+            exit 1
+          fi
+
+      - name: Raw tagged installer uses matching ref
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-raw-tag"
+          mkdir -p "$target"
+          curl -fsSL "https://raw.githubusercontent.com/micrfun/ai-team/${{ github.ref_name }}/install.sh" | bash -s -- "$target" --ref "${{ github.ref_name }}" --dry-run
+          if [ -d "$target/.ai" ]; then
+            echo "Raw tagged dry run created .ai directory"
+            exit 1
+          fi
+
   protocol-structure:
     name: Protocol structure
     runs-on: ubuntu-latest
@@ -186,6 +232,9 @@ jobs:
             ".ai/state/handoffs.md"
             ".ai/workflows/agent-run.md"
             ".ai/workflows/update-ai-team.md"
+            ".ai/templates/implementation-summary.md"
+            ".ai/templates/qa-report.md"
+            ".ai/templates/handoff.md"
           )
           for path in "${required[@]}"; do
             if [ ! -f "$path" ]; then

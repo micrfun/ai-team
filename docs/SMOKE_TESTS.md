@@ -67,18 +67,19 @@ Expected:
 PowerShell:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target C:\Temp\ai-team-empty -DryRun
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target C:\Temp\ai-team-empty -Ref v0.2.1 -DryRun
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- /tmp/ai-team-empty --dry-run
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- /tmp/ai-team-empty --ref v0.2.1 --dry-run
 ```
 
 Expected:
 
 - raw installer downloads the GitHub archive;
+- stable installer receives an explicit tag ref and does not fall back to `main`;
 - target files are not changed in dry-run mode;
 - planned file operations are visible.
 
@@ -90,6 +91,8 @@ GitHub Actions runs a subset of these checks on:
 - Ubuntu with bash.
 
 CI checks fresh install, dry-run, safe reinstall, context preservation, state/protocol files, and force mode. Raw-link checks are kept manual so release candidates can be tested against the intended branch or tag.
+
+CI also checks that installers accept a release tag through `-Ref` / `--ref`.
 
 ## Bootstrap check
 

@@ -54,9 +54,9 @@ Do not overwrite existing agent instructions without asking.
 
 ### Первый запуск
 
-Открой проект в любом AI CLI (Claude Code, Codex, Gemini CLI, Cursor, Antigravity) и просто опиши задачу.
+Открой проект в любом AI CLI (Claude Code, Codex, Gemini CLI, Cursor, Antigravity) и попроси агента прочитать `AI-TEAM-BOOTSTRAP.md`.
 
-Агент сам обнаружит, что контекст не заполнен (по маркеру `NOT_INITIALIZED` в `.ai/context/project.md`), и запустит роль **bootstrap**, которая:
+После этого агент явно проверит маркер `NOT_INITIALIZED` в `.ai/context/project.md` и запустит роль **bootstrap**, которая:
 
 1. Прочитает существующие файлы проекта (`package.json`, `README.md`, lockfiles, конфиги)
 2. Покажет тебе, что нашёл, и попросит подтвердить
@@ -84,7 +84,19 @@ Do not overwrite existing agent instructions without asking.
 install.sh / install.ps1  ← установщики
 ```
 
-Установщик также кладет `AI-TEAM-README.md`, `AI-TEAM-INSTALL.md` и `AI-TEAM-AGENT-INSTALL-PROMPT.md` в целевой проект, если таких файлов еще нет.
+Установщик также кладет `AI-TEAM-README.md`, `AI-TEAM-INSTALL.md`, `AI-TEAM-AGENT-INSTALL-PROMPT.md` и `AI-TEAM-BOOTSTRAP.md` в целевой проект.
+
+По умолчанию установка безопасная: существующие файлы не перезаписываются. Если файл уже есть, новая версия сохраняется рядом с суффиксом `.ai-team-new`. Явное перезаписывание включается только через `-Force` в PowerShell или `--force` в bash.
+
+Перед установкой можно посмотреть план без изменения файлов:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target C:\path\to\your\project -DryRun
+```
+
+```bash
+./install.sh /path/to/your/project --dry-run
+```
 
 ## Роли
 
@@ -172,3 +184,9 @@ releases/   ← release notes и postmortem
 - `https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh`
 
 Для воспроизводимых установок можно ссылаться на конкретный commit SHA вместо `main`.
+
+## Поддержка проекта
+
+- Изменения и релизы: [CHANGELOG.md](CHANGELOG.md)
+- Правила вклада: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Security policy: [SECURITY.md](SECURITY.md)

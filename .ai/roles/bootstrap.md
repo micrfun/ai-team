@@ -28,7 +28,7 @@
 - **Stack**: прочитай `package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `Gemfile`, `composer.json`, `pom.xml` — выведи языки, фреймворки, версии
 - **Conventions**: проверь наличие `.eslintrc`, `.prettierrc`, `pyproject.toml [tool.ruff]`, `.editorconfig`, `CONTRIBUTING.md`, `tsconfig.json`
 - **Project**: прочитай `README.md` — часто там есть описание проекта
-- **Git**: посмотри `git log --oneline -20` для понимания, что недавно делалось
+- **Git**: если правила проекта разрешают shell/Git-команды, посмотри `git log --oneline -20` для понимания, что недавно делалось. Если команды запрещены или среда нестабильна, пропусти Git history и продолжай по файлам.
 
 Покажи пользователю, что нашёл, и спроси — верно ли это.
 

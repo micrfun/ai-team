@@ -12,10 +12,22 @@ Run the command from the root of the target project.
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
+Preview without changing target files:
+
+```powershell
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -DryRun
+```
+
 ### macOS / Linux
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
+```
+
+Preview without changing target files:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- . --dry-run
 ```
 
 ## Agent install
@@ -40,19 +52,23 @@ The agent should:
 - `AI-TEAM-README.md` if it does not already exist
 - `AI-TEAM-INSTALL.md` if it does not already exist
 - `AI-TEAM-AGENT-INSTALL-PROMPT.md` if it does not already exist
+- `AI-TEAM-BOOTSTRAP.md`
 
 ## Conflict behavior
 
-The bundled installers check whether adapter directories already exist in the target project.
+The bundled installers are safe by default.
 
-If any of these directories already exist, the installer asks before overwriting:
+Existing files are preserved. When a file already exists, the installer writes the new copy next to it with a `.ai-team-new` suffix.
 
-- `.ai`
-- `.claude`
-- `.codex`
-- `.gemini`
-- `.cursor`
-- `.antigravity`
+Use explicit overwrite only when you intend to replace existing AI Team files:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target . -Force
+```
+
+```bash
+./install.sh . --force
+```
 
 For agent-driven installs, the agent should ask before overwriting existing instructions.
 
@@ -61,7 +77,7 @@ For agent-driven installs, the agent should ask before overwriting existing inst
 Open the project in your preferred AI tool and ask:
 
 ```text
-Run the AI Team init workflow for this project.
+Read AI-TEAM-BOOTSTRAP.md and run the AI Team init workflow for this project.
 ```
 
-The agent should read `.ai/workflows/init.md`, use the `bootstrap` role, and fill the context files for the specific project.
+The agent should read `AI-TEAM-BOOTSTRAP.md`, then `.ai/workflows/init.md`, use the `bootstrap` role, and fill the context files for the specific project.

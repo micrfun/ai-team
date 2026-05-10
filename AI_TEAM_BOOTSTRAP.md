@@ -45,6 +45,12 @@ Initialize AI Team for the current project without relying on hidden agent behav
    - what remains unknown;
    - exact local verification commands, if runtime verification is needed.
 
+5. If the project clearly matches a preset, ask the user before applying it:
+   - `.ai/presets/web-app.md`
+   - `.ai/presets/python-cli.md`
+   - `.ai/presets/open-source.md`
+   - `.ai/presets/agent-tooling.md`
+
 ## Discovery checklist
 
 Read files that exist in the target project:
@@ -63,6 +69,12 @@ Read files that exist in the target project:
 - lint, format, CI, deployment, and docs config files
 
 If shell commands are allowed by the target project, Git history can help. If shell commands are not allowed, skip Git history and continue from files.
+
+## Preset guidance
+
+Presets are optional context refinements. They should not override project facts.
+
+Use a preset only when it matches the target project, then summarize the proposed context changes before editing `.ai/context/*`.
 
 ## Completion criteria
 

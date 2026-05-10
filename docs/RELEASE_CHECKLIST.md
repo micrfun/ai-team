@@ -13,6 +13,7 @@ Runtime check must be performed by the user locally.
 - [ ] Review `CHANGELOG.md`.
 - [ ] Run `git diff --check`.
 - [ ] Run smoke tests from `docs/SMOKE_TESTS.md` in disposable target projects.
+- [ ] Confirm GitHub Actions smoke tests pass on the release commit.
 - [ ] Confirm no secrets, private paths, or local-only assumptions were added.
 
 ## Tagging

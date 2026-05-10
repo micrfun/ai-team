@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add GitHub Actions smoke tests for PowerShell and bash installers.
+- Add agent compatibility guide.
+- Add optional `.ai/presets/` for common project types.
+- Add roadmap and GitHub issue/PR templates.
+
 ## 0.1.0
 
 - Make PowerShell and bash installers safe by default.

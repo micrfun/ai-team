@@ -6,6 +6,8 @@
 
 GitHub: https://github.com/micrfun/ai-team
 
+[![Smoke tests](https://github.com/micrfun/ai-team/actions/workflows/smoke-tests.yml/badge.svg)](https://github.com/micrfun/ai-team/actions/workflows/smoke-tests.yml)
+
 ## Quickstart
 
 ### Установка одной командой
@@ -87,6 +89,7 @@ Do not overwrite existing agent instructions without asking.
   roles/                  ← описания ролей
   workflows/              ← процессы
   templates/              ← шаблоны артефактов (spec, ADR, review, eval)
+  presets/                ← типовые настройки для web, Python, open-source, agent tooling
   context/                ← контекст проекта (заполняется bootstrap'ом)
 .claude/                  ← адаптер Claude Code (CLAUDE.md + agents/ + commands/)
 .codex/                   ← адаптер Codex CLI (AGENTS.md)
@@ -205,4 +208,7 @@ releases/   ← release notes и postmortem
 - Smoke tests: [docs/SMOKE_TESTS.md](docs/SMOKE_TESTS.md)
 - Update guide: [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md)
 - Release checklist: [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+- Agent compatibility: [docs/AGENT_COMPATIBILITY.md](docs/AGENT_COMPATIBILITY.md)
+- Presets: [docs/PRESETS.md](docs/PRESETS.md)
+- Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
 - Examples: [examples/README.md](examples/README.md)

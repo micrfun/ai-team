@@ -1,0 +1,140 @@
+name: Smoke tests
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  powershell-installer:
+    name: PowerShell installer
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dry run does not write target files
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-dry-run"
+          New-Item -ItemType Directory -Force $target | Out-Null
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target -DryRun
+          if (Test-Path (Join-Path $target ".ai")) {
+            throw "Dry run created .ai directory"
+          }
+
+      - name: Fresh install creates expected files
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-fresh"
+          New-Item -ItemType Directory -Force $target | Out-Null
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target
+          $required = @(
+            ".ai/context/project.md",
+            ".codex/AGENTS.md",
+            "AI-TEAM-README.md",
+            "AI-TEAM-INSTALL.md",
+            "AI-TEAM-AGENT-INSTALL-PROMPT.md",
+            "AI-TEAM-BOOTSTRAP.md"
+          )
+          foreach ($path in $required) {
+            if (-not (Test-Path (Join-Path $target $path))) {
+              throw "Missing expected file: $path"
+            }
+          }
+
+      - name: Reinstall preserves existing files
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-existing"
+          New-Item -ItemType Directory -Force (Join-Path $target ".codex") | Out-Null
+          "existing" | Set-Content (Join-Path $target ".codex/AGENTS.md")
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target
+          $existing = Get-Content (Join-Path $target ".codex/AGENTS.md") -Raw
+          if ($existing.Trim() -ne "existing") {
+            throw "Existing AGENTS.md was overwritten"
+          }
+          if (-not (Test-Path (Join-Path $target ".codex/AGENTS.md.ai-team-new"))) {
+            throw "Conflict copy was not created"
+          }
+
+      - name: Force overwrites existing files
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-force"
+          New-Item -ItemType Directory -Force (Join-Path $target ".codex") | Out-Null
+          "existing" | Set-Content (Join-Path $target ".codex/AGENTS.md")
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target -Force
+          $content = Get-Content (Join-Path $target ".codex/AGENTS.md") -Raw
+          if ($content -notmatch "Project Instructions for AI Agents") {
+            throw "Force mode did not overwrite AGENTS.md"
+          }
+
+  bash-installer:
+    name: Bash installer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dry run does not write target files
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-dry-run"
+          mkdir -p "$target"
+          ./install.sh "$target" --dry-run
+          if [ -d "$target/.ai" ]; then
+            echo "Dry run created .ai directory"
+            exit 1
+          fi
+
+      - name: Fresh install creates expected files
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-fresh"
+          mkdir -p "$target"
+          ./install.sh "$target"
+          required=(
+            ".ai/context/project.md"
+            ".codex/AGENTS.md"
+            "AI-TEAM-README.md"
+            "AI-TEAM-INSTALL.md"
+            "AI-TEAM-AGENT-INSTALL-PROMPT.md"
+            "AI-TEAM-BOOTSTRAP.md"
+          )
+          for path in "${required[@]}"; do
+            if [ ! -f "$target/$path" ]; then
+              echo "Missing expected file: $path"
+              exit 1
+            fi
+          done
+
+      - name: Reinstall preserves existing files
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-existing"
+          mkdir -p "$target/.codex"
+          printf '%s\n' "existing" > "$target/.codex/AGENTS.md"
+          ./install.sh "$target"
+          if [ "$(cat "$target/.codex/AGENTS.md")" != "existing" ]; then
+            echo "Existing AGENTS.md was overwritten"
+            exit 1
+          fi
+          if [ ! -f "$target/.codex/AGENTS.md.ai-team-new" ]; then
+            echo "Conflict copy was not created"
+            exit 1
+          fi
+
+      - name: Force overwrites existing files
+        shell: bash
+        run: |
+          target="$RUNNER_TEMP/ai-team-force"
+          mkdir -p "$target/.codex"
+          printf '%s\n' "existing" > "$target/.codex/AGENTS.md"
+          ./install.sh "$target" --force
+          if ! grep -q "Project Instructions for AI Agents" "$target/.codex/AGENTS.md"; then
+            echo "Force mode did not overwrite AGENTS.md"
+            exit 1
+          fi

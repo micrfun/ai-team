@@ -101,3 +101,5 @@ Use [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md) when AI Team is already install
 ## Verification
 
 Use [docs/SMOKE_TESTS.md](docs/SMOKE_TESTS.md) before publishing a release or changing installer behavior.
+
+CI also runs installer smoke tests on Windows and Ubuntu through GitHub Actions.

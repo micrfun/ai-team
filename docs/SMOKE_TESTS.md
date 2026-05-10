@@ -80,6 +80,15 @@ Expected:
 - target files are not changed in dry-run mode;
 - planned file operations are visible.
 
+## CI coverage
+
+GitHub Actions runs a subset of these checks on:
+
+- Windows with PowerShell;
+- Ubuntu with bash.
+
+CI checks fresh install, dry-run, safe reinstall, and force mode. Raw-link checks are kept manual so release candidates can be tested against the intended branch or tag.
+
 ## Bootstrap check
 
 After installing into a disposable project, open it with an agent and ask:

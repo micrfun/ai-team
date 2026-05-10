@@ -12,6 +12,12 @@ Run the command from the root of the target project.
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
+Stable `v0.1.0` install:
+
+```powershell
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+```
+
 Preview without changing target files:
 
 ```powershell
@@ -22,6 +28,12 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
+```
+
+Stable `v0.1.0` install:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.sh | bash -s -- .
 ```
 
 Preview without changing target files:
@@ -81,3 +93,11 @@ Read AI-TEAM-BOOTSTRAP.md and run the AI Team init workflow for this project.
 ```
 
 The agent should read `AI-TEAM-BOOTSTRAP.md`, then `.ai/workflows/init.md`, use the `bootstrap` role, and fill the context files for the specific project.
+
+## Updating
+
+Use [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md) when AI Team is already installed in a project.
+
+## Verification
+
+Use [docs/SMOKE_TESTS.md](docs/SMOKE_TESTS.md) before publishing a release or changing installer behavior.

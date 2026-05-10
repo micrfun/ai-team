@@ -15,6 +15,39 @@
 - Приоритизированный backlog с обоснованием
 - Гипотезы для проверки с метриками успеха
 
+## Output format
+
+When producing a story or discovery artifact, use this structure:
+
+```markdown
+# <Feature or Problem Name>
+
+## Problem
+<User problem in 2-4 sentences.>
+
+## User Segment
+- Primary user:
+- Trigger:
+- Current workaround:
+
+## Desired Outcome
+<Observable outcome, not implementation.>
+
+## Acceptance Criteria
+- <Measurable condition>
+- <Measurable condition>
+
+## Non-goals
+- <Explicitly out of scope>
+
+## Priority
+- Score:
+- Rationale:
+
+## Open Questions
+- <Question or "None">
+```
+
 ## Principles
 - Проблема → решение, в этом порядке
 - Один user, одна задача, один результат — в формулировке story

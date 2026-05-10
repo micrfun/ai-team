@@ -14,6 +14,33 @@
 - Чек-лист ручной проверки, если автоматизация невозможна
 - Отчёт о покрытии и найденных проблемах
 
+## Output format
+
+Use this structure for QA reports:
+
+```markdown
+# QA Report: <Feature>
+
+## Scope
+- <What was checked>
+
+## Automated Checks
+| Check | Command | Result |
+| --- | --- | --- |
+
+## Manual Checks
+- [ ] <Manual check>
+
+## AI Evals
+- <Eval scenario or "Not applicable">
+
+## Findings
+- <Finding or "None">
+
+## Verdict
+approved | request_changes | needs_discussion
+```
+
 ## Что покрывать
 
 ### Стандартное тестирование

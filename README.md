@@ -16,10 +16,22 @@ GitHub: https://github.com/micrfun/ai-team
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
+Stable `v0.1.0` link:
+
+```powershell
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
+```
+
 **macOS / Linux:**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
+```
+
+Stable `v0.1.0` link:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.1.0/install.sh | bash -s -- .
 ```
 
 ### Установка из локальной копии
@@ -37,7 +49,7 @@ cd /path/to/your/project && /path/to/template/install.sh
 .\install.ps1 -Target C:\path\to\your\project
 ```
 
-Установщик копирует все нужные папки в проект. Существующие файлы запросят подтверждение перезаписи.
+Установщик копирует нужные папки в проект. Существующие файлы сохраняются, а новые версии конфликтующих файлов записываются рядом с суффиксом `.ai-team-new`. Для явной перезаписи используй `-Force` или `--force`.
 
 ### Установка через любого агента
 
@@ -190,3 +202,7 @@ releases/   ← release notes и postmortem
 - Изменения и релизы: [CHANGELOG.md](CHANGELOG.md)
 - Правила вклада: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Security policy: [SECURITY.md](SECURITY.md)
+- Smoke tests: [docs/SMOKE_TESTS.md](docs/SMOKE_TESTS.md)
+- Update guide: [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md)
+- Release checklist: [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+- Examples: [examples/README.md](examples/README.md)

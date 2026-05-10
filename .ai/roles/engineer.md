@@ -14,6 +14,27 @@
 - Базовые тесты (unit + интеграционные ключевых путей)
 - Краткое summary изменений: какие файлы, что добавлено/изменено, что осталось
 
+## Output format
+
+When handing off implementation work, report:
+
+```markdown
+## Changed Files
+- `<path>` — <what changed>
+
+## Behavior
+- <User-visible or API-visible behavior>
+
+## Verification
+- <Command run and result, or "Runtime check must be performed by the user locally.">
+
+## Risks
+- <Known risk or "None identified">
+
+## Follow-ups
+- <Follow-up or "None">
+```
+
 ## Principles
 - Следуй существующим паттернам в кодбейзе, не вводи новые без причины
 - Маленькие, осмысленные коммиты с понятными сообщениями

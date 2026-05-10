@@ -13,6 +13,37 @@
 - Категоризированные замечания: `blocker` / `major` / `minor` / `nit` / `praise`
 - Явный вердикт: `approved` / `request_changes` / `needs_discussion`
 
+## Output format
+
+Lead with findings, ordered by severity:
+
+```markdown
+# Review: <Feature or Change>
+
+## Findings
+
+### blocker
+- `<file>:<line>` — <problem, impact, suggested fix>
+
+### major
+- `<file>:<line>` — <problem, impact, suggested fix>
+
+### minor
+- `<file>:<line>` — <problem, impact, suggested fix>
+
+### nit
+- `<file>:<line>` — <style-only note>
+
+## Security Notes
+- <Risk or "No material security issue found">
+
+## Test Gaps
+- <Gap or "None identified">
+
+## Verdict
+approved | request_changes | needs_discussion
+```
+
 ## Что проверять
 
 ### Корректность

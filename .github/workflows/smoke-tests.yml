@@ -89,9 +89,22 @@ jobs:
         run: |
           $target = Join-Path $env:RUNNER_TEMP "ai-team-ref"
           New-Item -ItemType Directory -Force $target | Out-Null
-          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target -Ref v0.2.0 -DryRun
+          powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target $target -Ref v0.2.1 -DryRun
           if (Test-Path (Join-Path $target ".ai")) {
             throw "Ref dry run created .ai directory"
+          }
+
+      - name: Ref parameter downloads archive without local template
+        shell: pwsh
+        run: |
+          $scriptDir = Join-Path $env:RUNNER_TEMP "ai-team-installer-only"
+          $target = Join-Path $env:RUNNER_TEMP "ai-team-ref-download"
+          New-Item -ItemType Directory -Force $scriptDir | Out-Null
+          New-Item -ItemType Directory -Force $target | Out-Null
+          Copy-Item .\install.ps1 (Join-Path $scriptDir "install.ps1")
+          powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir "install.ps1") -Target $target -Ref v0.2.1 -DryRun
+          if (Test-Path (Join-Path $target ".ai")) {
+            throw "Remote ref dry run created .ai directory"
           }
 
       - name: Raw tagged installer uses matching ref
@@ -192,9 +205,22 @@ jobs:
         run: |
           target="$RUNNER_TEMP/ai-team-ref"
           mkdir -p "$target"
-          ./install.sh "$target" --ref v0.2.0 --dry-run
+          ./install.sh "$target" --ref v0.2.1 --dry-run
           if [ -d "$target/.ai" ]; then
             echo "Ref dry run created .ai directory"
+            exit 1
+          fi
+
+      - name: Ref parameter downloads archive without local template
+        shell: bash
+        run: |
+          script_dir="$RUNNER_TEMP/ai-team-installer-only"
+          target="$RUNNER_TEMP/ai-team-ref-download"
+          mkdir -p "$script_dir" "$target"
+          cp ./install.sh "$script_dir/install.sh"
+          bash "$script_dir/install.sh" "$target" --ref v0.2.1 --dry-run
+          if [ -d "$target/.ai" ]; then
+            echo "Remote ref dry run created .ai directory"
             exit 1
           fi
 

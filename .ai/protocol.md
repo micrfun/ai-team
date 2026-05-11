@@ -1,7 +1,7 @@
 # AI Team `.ai/` Protocol
 
 **Protocol version**: 0.2-draft
-**AI Team release**: 0.2.1
+**AI Team release**: 0.2.2
 **Purpose**: Define the portable file protocol used by AI coding agents inside a repository.
 
 AI Team is a file-based coordination layer. Agents communicate through project files, not hidden chat memory or a required runtime service.

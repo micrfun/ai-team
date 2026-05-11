@@ -20,9 +20,10 @@ Rules:
 
 Install:
 - On Windows PowerShell, use:
-  $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.1
+  $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.2
 - On macOS/Linux, use:
-  curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- . --ref v0.2.1
+  curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.sh | bash -s -- . --ref v0.2.2
+- Keep the matching -Ref / --ref argument for stable installs. Without it, the installer defaults to main.
 - If shell execution is not available, manually copy these directories from the repository root into the target project:
   .ai
   .claude

@@ -12,11 +12,13 @@ Run the command from the root of the target project.
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.2.1` install:
+Stable `v0.2.2` install:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.1
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.2
 ```
+
+Keep the matching `-Ref` argument when using a stable raw link. Without it, the installer defaults to `main`.
 
 Preview without changing target files:
 
@@ -30,11 +32,13 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.2.1` install:
+Stable `v0.2.2` install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- . --ref v0.2.1
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.sh | bash -s -- . --ref v0.2.2
 ```
+
+Keep the matching `--ref` argument when using a stable raw link. Without it, the installer defaults to `main`.
 
 Preview without changing target files:
 

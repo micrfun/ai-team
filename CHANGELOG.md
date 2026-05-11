@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2
+
+- Clarify that stable raw installer commands must keep the matching `-Ref` / `--ref` argument.
+- Add CI coverage for remote ref archive resolution when installers run outside a local template checkout.
+- Add `agent-run` and `update-ai-team` to the README workflow table.
+- Add minimum compliant project guidance to the public protocol docs.
+- Add release process documentation.
+
 ## 0.2.1
 
 - Fix stable raw installer behavior with explicit `-Ref` / `--ref` support.

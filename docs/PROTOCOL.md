@@ -6,10 +6,10 @@ The source of truth installed into projects is [.ai/protocol.md](../.ai/protocol
 
 ## Current status
 
-- **AI Team release**: 0.2.1
+- **AI Team release**: 0.2.2
 - **Protocol version**: 0.2-draft
 
-`v0.2.1` includes the draft `0.2` protocol. The protocol is usable, but not frozen yet.
+`v0.2.2` includes the draft `0.2` protocol. The protocol is usable, but not frozen yet.
 
 ## Lifecycle
 
@@ -34,3 +34,18 @@ Agents coordinate by reading and writing files:
 - `.ai/templates/*` for artifact formats.
 
 See [.ai/protocol.md](../.ai/protocol.md) for the full protocol.
+
+## Minimum Compliant Project
+
+A project is minimally compatible with AI Team when it contains:
+
+- `.ai/protocol.md`;
+- `.ai/context/project.md`;
+- `.ai/context/stack.md`;
+- `.ai/context/conventions.md`;
+- `.ai/state/current.md`;
+- at least one usable workflow in `.ai/workflows/`;
+- at least one usable role in `.ai/roles/`;
+- adapter instructions for every agent tool expected to operate in the project.
+
+For a fully installed project, use the official installer instead of copying only the minimum set. The installer also adds templates, state files, update docs, and agent-specific adapters.

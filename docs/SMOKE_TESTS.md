@@ -67,13 +67,13 @@ Expected:
 PowerShell:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target C:\Temp\ai-team-empty -Ref v0.2.1 -DryRun
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target C:\Temp\ai-team-empty -Ref v0.2.2 -DryRun
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- /tmp/ai-team-empty --ref v0.2.1 --dry-run
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.sh | bash -s -- /tmp/ai-team-empty --ref v0.2.2 --dry-run
 ```
 
 Expected:

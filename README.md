@@ -17,7 +17,7 @@ AI Team is not:
 - a deployment system;
 - a replacement for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw, or other agents.
 
-`v0.2.1` includes the draft `0.2` protocol. The protocol is usable, but not frozen yet.
+`v0.2.2` includes the draft `0.2` protocol. The protocol is usable, but not frozen yet.
 
 GitHub: https://github.com/micrfun/ai-team
 
@@ -33,10 +33,10 @@ GitHub: https://github.com/micrfun/ai-team
 $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/main/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target .
 ```
 
-Stable `v0.2.1` link:
+Stable `v0.2.2` link:
 
 ```powershell
-$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.1
+$installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.ps1" -OutFile $installer; powershell -ExecutionPolicy Bypass -File $installer -Target . -Ref v0.2.2
 ```
 
 **macOS / Linux:**
@@ -45,11 +45,13 @@ $installer = Join-Path $env:TEMP "install-ai-team.ps1"; Invoke-WebRequest "https
 curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/main/install.sh | bash -s -- .
 ```
 
-Stable `v0.2.1` link:
+Stable `v0.2.2` link:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.1/install.sh | bash -s -- . --ref v0.2.1
+curl -fsSL https://raw.githubusercontent.com/micrfun/ai-team/v0.2.2/install.sh | bash -s -- . --ref v0.2.2
 ```
+
+For stable raw links, keep the matching `-Ref` / `--ref` argument. Without it, installers default to `main`, which is the latest development version.
 
 ### Установка из локальной копии
 
@@ -150,11 +152,13 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Target C:\path\to\your\p
 | Workflow | Когда использовать |
 |----------|-------------------|
 | `init` | Первичная настройка проекта (запускается автоматически) |
+| `agent-run` | Универсальный старт любого агента: читает protocol/context/state и выбирает роль или workflow |
 | `discovery` | Есть идея, неясно что строить |
 | `plan` | Есть задача, нужна спека |
 | `implement` | Есть спека, нужен код |
 | `review` | Отдельное ревью без полного цикла |
 | `ship` | Подготовка и проведение релиза |
+| `update-ai-team` | Безопасное обновление AI Team через `.ai-team-new` и human-reviewed merge |
 
 ## Как использовать
 
@@ -230,6 +234,7 @@ releases/   ← release notes и postmortem
 - Smoke tests: [docs/SMOKE_TESTS.md](docs/SMOKE_TESTS.md)
 - Update guide: [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md)
 - Release checklist: [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+- Release process: [docs/RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md)
 - Agent compatibility: [docs/AGENT_COMPATIBILITY.md](docs/AGENT_COMPATIBILITY.md)
 - Compatibility matrix: [docs/COMPATIBILITY_MATRIX.md](docs/COMPATIBILITY_MATRIX.md)
 - Presets: [docs/PRESETS.md](docs/PRESETS.md)
